@@ -1,103 +1,56 @@
 <script lang="ts">
-  import { counterPanel } from "./store";
-  import { onMount } from "svelte";
+  import CounterForm from "./CounterForm.svelte";
 
+
+  type CounterPanel = {
+		id: number,
+		title: string,
+		count: number
+	}
+
+  export let counterPanel: CounterPanel[] = [{ id: 0, title: "new", count: 0 }]
+  export let newID: number = Math.floor(Math.random() * 100);
   export let title: string = "new";
   export let count: number = 0;
-  let newID: number = Math.floor(Math.random() * 100);
-  let newCounterPanel = null;
 
-  onMount(() => {
-    newCounterPanel.focus()
-  })
 
-  export function incrementCount() {
-    count ++;
+  function addCounterPanel(): void {
+    counterPanel = counterPanel.concat({id: newID, title: title, count: count})
+    newID += newID
   }
-  export function decrementCount() { 
-    count --;
-    if (count < 0) {
-      count = 0;
-    };
+  function removeCounterPanel(event) {
+    counterPanel = counterPanel.filter((item) => item.id != event.detail.id)
   }
-  export const resetCount = () => {
-    count = 0;
-  }
-  $: console.log(count)
 
-  function addCounterPanel() {
-    $counterPanel = [...$counterPanel, {id: newID, title: title, count: 0}]
-  }
-  function removeCounterPanel(idx: number) {
-    $counterPanel.splice(idx, 1)
-    $counterPanel = $counterPanel
+  function totalCount(CounterPanel: CounterPanel[]): number {
+    return (
+      CounterPanel.map((item) => 
+        item.count
+      ).reduce((preVal, curVal) => 
+        preVal + curVal, 0
+      )
+    )
   }
 </script>
 
 <div>
-  {#each $counterPanel as item, index}
-    <form class="counterform" bind:this={newCounterPanel}>
-      <input type="text" class="input" bind:value={item.title} />
-      <span class="span">{count}</span>
-      <button type="button" class="increment" on:click={incrementCount}>+</button>
-      <button type="button" class="decrement" on:click={decrementCount}>-</button>
-      <button type="button" class="reset" on:click={resetCount}>0</button>
-      <button type="button" class="remove" on:click={() => removeCounterPanel(index)}>x</button>
-    </form>
+  {#each counterPanel as item(item.id)}
+    <CounterForm id={item.id} bind:title={item.title} bind:count={item.count} on:remove={removeCounterPanel} />
   {/each}
-
-  <!-- <CounterForm /> -->
 
   <button type="button" class="addcounter" on:click={addCounterPanel}>new counter</button>
 
   <div>
     title list:
-    {#each $counterPanel as item}
+    {#each counterPanel as item}
       {item.title}, 
     {/each}
   </div>
 
-  <div>sum of count: {count}</div>
+  <div>sum of count: {totalCount(counterPanel)}</div>
 </div>
 
 <style>
-  .counterform {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  .input {
-    padding: 0.5rem 1rem;
-    border: none;
-    background-color: rgb(253, 253, 253);
-    color: #777;
-    width: 170px;
-  }
-  .span {
-    padding: 0.5rem 2rem;
-    font-size: larger;
-  }
-  .increment, .decrement, .reset  {
-    color: #eee;
-    border: none;
-    padding: 0.5rem;
-  }
-  .increment {
-    background-color: rgb(255, 110, 110);
-  }
-  .decrement {
-    background-color: rgb(110, 110, 255);
-  }
-  .reset {
-    background-color: rgb(255, 204, 110);
-  }
-  .remove {
-    color: #777;
-    background-color: #fff;
-    border: none;
-    margin-left: 1rem;
-  }
   .addcounter {
     width: 400px;
     border: 0;
