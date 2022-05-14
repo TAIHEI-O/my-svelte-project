@@ -11,16 +11,13 @@
     count ++;
   }
   export function decrementCount(): void { 
-    count --;
-    if (count < 0) {
-      count = 0;
-    };
+    if (count > 0) {
+      count --;
+    }
   }
   export const resetCount = () => {
     count = 0;
   }
-  $: console.log(count)
-
 
   const dispach = createEventDispatcher()
   function removeCounterPanel(): void {
