@@ -3,20 +3,21 @@
 
 
   type CounterPanel = {
-		id: number,
-		title: string,
-		count: number
+		id?: number,
+		title?: string,
+		count?: number
 	}
 
   export let counterPanel: CounterPanel[] = [{ id: 0, title: "new", count: 0 }]
-  export let newID: number = Math.floor(Math.random() * 100);
+  export let newID: number = 1;
   export let title: string = "new";
   export let count: number = 0;
 
 
   function addCounterPanel(): void {
     counterPanel = counterPanel.concat({id: newID, title: title, count: count})
-    newID += newID
+    newID ++;
+    // console.log(newID)
   }
   function removeCounterPanel(event) {
     counterPanel = counterPanel.filter((item) => item.id != event.detail.id)
@@ -24,10 +25,8 @@
 
   function totalCount(CounterPanel: CounterPanel[]): number {
     return (
-      CounterPanel.map((item) => 
-        item.count
-      ).reduce((preVal, curVal) => 
-        preVal + curVal, 0
+      CounterPanel.reduce((preVal, curVal) => 
+        preVal + curVal.count, 0
       )
     )
   }
