@@ -29,10 +29,12 @@
       )
     )
   }
-  function titleList() {
-    counterPanel.map((counter) => 
-      counter.title
-    ).join()
+  function titleList(CounterPanel: CounterPanel[]): string {
+    return (
+      CounterPanel.map((counter) => 
+        counter.title
+      ).join(", ")
+    )
   }
 </script>
 
@@ -43,10 +45,7 @@
 
   <button type="button" class="addcounter" on:click={addCounterPanel}>new counter</button>
 
-  <div>
-    title list: {titleList}
-  </div>
-
+  <div>title list: {titleList(counterPanel)}</div>
   <div>sum of count: {totalCount(counterPanel)}</div>
 </div>
 
