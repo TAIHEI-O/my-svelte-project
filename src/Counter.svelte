@@ -17,7 +17,6 @@
   function addCounterPanel(): void {
     counterPanel = counterPanel.concat({id: newID, title: title, count: count})
     newID ++;
-    // console.log(newID)
   }
   function removeCounterPanel(event) {
     counterPanel = counterPanel.filter((item) => item.id != event.detail.id)
@@ -30,6 +29,11 @@
       )
     )
   }
+  function titleList() {
+    counterPanel.map((counter) => 
+      counter.title
+    ).join()
+  }
 </script>
 
 <div>
@@ -40,10 +44,7 @@
   <button type="button" class="addcounter" on:click={addCounterPanel}>new counter</button>
 
   <div>
-    title list:
-    {#each counterPanel as item}
-      {item.title}, 
-    {/each}
+    title list: {titleList}
   </div>
 
   <div>sum of count: {totalCount(counterPanel)}</div>
