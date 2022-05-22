@@ -51,11 +51,14 @@
 
 <style>
   .addcounter {
-    width: 400px;
+    width: 230px;
     border: 0;
     border-radius: 5px;
     background-color: rgb(73, 197, 110);
-    padding: 0.3rem;
     color: #fff;
+    margin: 0.5rem;
+  }
+  .addcounter:active {
+    background-color: rgb(63, 187, 100);
   }
 </style>

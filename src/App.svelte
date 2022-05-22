@@ -9,16 +9,23 @@
 
 <style>
   main {
+    background-color: #f5f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    width: auto;
+    min-height: 100vh;
     padding: 1em;
-    max-width: 240px;
     margin: 0 auto;
   }
 
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
-    font-size: 4em;
+    text-align: center;
+    font-size: 4rem;
     font-weight: 100;
   }
 

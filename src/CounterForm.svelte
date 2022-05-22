@@ -36,40 +36,60 @@
 
 <style>
   .counterform {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #eee;
+    max-width: 100%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 0.5rem;
+    margin: 0.5rem;
   }
   .input {
-    padding: 0.5rem 1rem;
     border: none;
-    background-color: rgb(253, 253, 253);
     color: #777;
-    width: 170px;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    display: block;
+    width: 140px;
   }
   .span {
-    padding: 0.5rem 2rem;
+    padding: 0rem 1.5rem;
     font-size: larger;
+    text-align: center;
   }
   .increment, .decrement, .reset  {
     color: #eee;
     border: none;
     padding: 0.5rem;
+    margin: 0;
   }
   .increment {
     background-color: rgb(255, 110, 110);
   }
+  .increment:active {
+    background-color: rgb(245, 100, 100);
+  }
   .decrement {
     background-color: rgb(110, 110, 255);
+  }
+  .decrement:active {
+    background-color: rgb(100, 100, 245);
   }
   .reset {
     background-color: rgb(255, 204, 110);
   }
+  .reset:active {
+    background-color: rgb(245, 194, 100);
+  }
   .remove {
     color: #777;
-    background-color: #fff;
+    background-color: #eee;
     border: none;
-    margin-left: 1rem;
+    padding: 0.5rem;
+    margin: 0 0 0 0.5rem;
   }
 </style>
